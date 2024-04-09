@@ -21,4 +21,6 @@ int main(int argc, char *argv[]) {
             .build();
 
     server->runIfFlagIsSet(argc, argv);
+
+    std::cout << "Флага не было и сервер не запустился. Привет, Мир!" << '\n';
 }

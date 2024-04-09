@@ -27,7 +27,7 @@ set(PROJECT_EXAMPLE synfilesharingExample)
 add_executable(${PROJECT_EXAMPLE})
 target_sources(${PROJECT_EXAMPLE}
         PUBLIC
-        examples/main.cpp
+        examples/server.cpp
         src/synfs.cpp
         src/implementations/server.cpp
         src/builders/server_builder.cpp
