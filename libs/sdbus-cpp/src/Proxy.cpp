@@ -94,7 +94,7 @@ MethodReply Proxy::callMethod(const MethodCall& message, uint64_t timeout)
     // running typically in its own thread. We have to avoid polling on socket from several threads.
     // So we have to branch here: either we are within the context of the event loop thread, then we
     // can send the message simply via sd_bus_call, which blocks. Or we are in another thread, then
-    // we can perform the send operation of the method call message from here (because that is thread-
+    // we can run the send operation of the method call message from here (because that is thread-
     // safe like other sd-bus API accesses), but the incoming reply we have to get through the event
     // loop thread, because this is the only rightful listener on the sd-bus connection socket.
     // So, technically, we use async means to wait here for reply received by the event loop thread.

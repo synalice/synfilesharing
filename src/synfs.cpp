@@ -1,5 +1,5 @@
 #include "synfilesharing/synfs.h"
-#include "sdbus-c++/sdbus-c++.h"
 
-#include <iostream>
-
+synfs::ServerBuilder synfs::makeServer() {
+    return {};
+}

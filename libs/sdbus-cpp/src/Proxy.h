@@ -169,7 +169,7 @@ namespace sdbus::internal {
                     calls_.erase(it);
                     lock.unlock();
 
-                    // Releasing call slot pointer acquires global sd-bus mutex. We have to perform the release
+                    // Releasing call slot pointer acquires global sd-bus mutex. We have to run the release
                     // out of the `mutex_' critical section here, because if the `removeCall` is called by some
                     // thread and at the same time Proxy's async reply handler (which already holds global sd-bus
                     // mutex) is in progress in a different thread, we get double-mutex deadlock.
@@ -183,7 +183,7 @@ namespace sdbus::internal {
                 calls_ = {};
                 lock.unlock();
 
-                // Releasing call slot pointer acquires global sd-bus mutex. We have to perform the release
+                // Releasing call slot pointer acquires global sd-bus mutex. We have to run the release
                 // out of the `mutex_' critical section here, because if the `clear` is called by some thread
                 // and at the same time Proxy's async reply handler (which already holds global sd-bus
                 // mutex) is in progress in a different thread, we get double-mutex deadlock.

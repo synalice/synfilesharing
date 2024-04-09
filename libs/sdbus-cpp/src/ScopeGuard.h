@@ -30,12 +30,12 @@
 #include <exception>
 #include <utility>
 
-// Straightforward, modern, easy-to-use RAII utility to perform work on scope exit in an exception-safe manner.
+// Straightforward, modern, easy-to-use RAII utility to run work on scope exit in an exception-safe manner.
 //
 // The utility helps providing basic exception safety guarantee by ensuring that the resources are always
 // released in face of an exception and released or kept when exiting the scope normally.
 //
-// Use SCOPE_EXIT if you'd like to perform an (mostly clean-up) operation when the scope ends, either due
+// Use SCOPE_EXIT if you'd like to run an (mostly clean-up) operation when the scope ends, either due
 // to an exception or because it just ends normally.
 // Use SCOPE_EXIT_NAMED if you'd like to conditionally deactivate given scope-exit operation. This is useful
 // if, for example, we want the operation to be executed only in face of an exception.

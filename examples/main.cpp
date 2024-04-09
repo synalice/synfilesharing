@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <memory>
 #include "synfilesharing/synfs.h"
 
 int main(int argc, char *argv[]) {
@@ -8,7 +10,7 @@ int main(int argc, char *argv[]) {
     };
 
     auto onReceiveFiles = [](const std::vector<std::string> &filePaths) {
-        for (const std::string &filePath: filePaths) {
+        for (std::string_view filePath: filePaths) {
             std::cout << filePath << '\n';
         }
     };
@@ -17,4 +19,6 @@ int main(int argc, char *argv[]) {
             .setAllowedMimeTypes(allowedMimeTypes)
             .setOnReceiveFiles(onReceiveFiles)
             .build();
+
+    server->runIfFlagIsSet(argc, argv);
 }
