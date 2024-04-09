@@ -22,10 +22,10 @@ add_subdirectory(libs/sdbus-cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC libs/sdbus-cpp/include)
 target_link_libraries(${PROJECT_NAME} INTERFACE sdbus-c++)
 
-# Example executable
-set(PROJECT_EXAMPLE synfilesharingExample)
-add_executable(${PROJECT_EXAMPLE})
-target_sources(${PROJECT_EXAMPLE}
+# Example server
+set(SERVER_EXAMPLE serverExample)
+add_executable(${SERVER_EXAMPLE})
+target_sources(${SERVER_EXAMPLE}
         PUBLIC
         examples/server.cpp
         src/synfs.cpp
@@ -34,12 +34,36 @@ target_sources(${PROJECT_EXAMPLE}
         src/implementations/client.cpp
         src/builders/client_builder.cpp
 )
-target_include_directories(${PROJECT_EXAMPLE}
+target_include_directories(${SERVER_EXAMPLE}
         PUBLIC
         include
         libs/sdbus-cpp/include
 )
-target_link_libraries(${PROJECT_EXAMPLE}
+target_link_libraries(${SERVER_EXAMPLE}
+        PUBLIC
+        ${PROJECT_NAME}
+        INTERFACE
+        sdbus-c++
+)
+
+# Example client
+set(CLIENT_EXAMPLE clientExample)
+add_executable(${CLIENT_EXAMPLE})
+target_sources(${CLIENT_EXAMPLE}
+        PUBLIC
+        examples/client.cpp
+        src/synfs.cpp
+        src/implementations/server.cpp
+        src/builders/server_builder.cpp
+        src/implementations/client.cpp
+        src/builders/client_builder.cpp
+)
+target_include_directories(${CLIENT_EXAMPLE}
+        PUBLIC
+        include
+        libs/sdbus-cpp/include
+)
+target_link_libraries(${CLIENT_EXAMPLE}
         PUBLIC
         ${PROJECT_NAME}
         INTERFACE
