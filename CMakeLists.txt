@@ -31,6 +31,8 @@ target_sources(${PROJECT_EXAMPLE}
         src/synfs.cpp
         src/implementations/server.cpp
         src/builders/server_builder.cpp
+        src/implementations/client.cpp
+        src/builders/client_builder.cpp
 )
 target_include_directories(${PROJECT_EXAMPLE}
         PUBLIC

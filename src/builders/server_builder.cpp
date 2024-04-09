@@ -1,6 +1,5 @@
 #include "synfilesharing/synfs.h"
 
-
 synfs::ServerBuilder &synfs::ServerBuilder::setDBusName(std::string_view name) {
     this->_dBusName = name;
     return *this;
