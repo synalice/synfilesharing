@@ -294,8 +294,8 @@ void concatenate(sdbus::MethodCall call)
 int main(int argc, char *argv[])
 {
     // Create D-Bus connection to the system bus and requests name on it.
-    const char* serviceName = "org.sdbuscpp.concatenator";
-    auto connection = sdbus::createSystemBusConnection(serviceName);
+    const char* _serverName = "org.sdbuscpp.concatenator";
+    auto connection = sdbus::createSystemBusConnection(_serverName);
 
     // Create concatenator D-Bus object.
     const char* objectPath = "/org/sdbuscpp/concatenator";
@@ -487,8 +487,8 @@ The code written using this layer expresses in a declarative way *what* it does,
 int main(int argc, char *argv[])
 {
     // Create D-Bus connection to the system bus and requests name on it.
-    const char* serviceName = "org.sdbuscpp.concatenator";
-    auto connection = sdbus::createSystemBusConnection(serviceName);
+    const char* _serverName = "org.sdbuscpp.concatenator";
+    auto connection = sdbus::createSystemBusConnection(_serverName);
 
     // Create concatenator D-Bus object.
     const char* objectPath = "/org/sdbuscpp/concatenator";
@@ -849,8 +849,8 @@ That's it. We now have an implementation of a D-Bus object implementing `org.sdb
 int main(int argc, char *argv[])
 {
     // Create D-Bus connection to the system bus and requests name on it.
-    const char* serviceName = "org.sdbuscpp.concatenator";
-    auto connection = sdbus::createSystemBusConnection(serviceName);
+    const char* _serverName = "org.sdbuscpp.concatenator";
+    auto connection = sdbus::createSystemBusConnection(_serverName);
 
     // Create concatenator D-Bus object.
     const char* objectPath = "/org/sdbuscpp/concatenator";

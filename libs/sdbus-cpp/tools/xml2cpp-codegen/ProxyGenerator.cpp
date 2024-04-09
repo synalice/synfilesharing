@@ -171,7 +171,7 @@ std::tuple<std::string, std::string> ProxyGenerator::processMethods(const Nodes&
             else
             {
                 if (annotationName == "org.freedesktop.DBus.Method.Async"
-                     && (annotationValue == "client" || annotationValue == "clientserver" || annotationValue == "client-server"))
+                     && (annotationValue == "client" || annotationValue == "implementations" || annotationValue == "client-server"))
                     async = true;
                 else if (annotationName == "org.freedesktop.DBus.Method.Async.ClientImpl" && annotationValue == "callback")
                     future = false;
