@@ -1,4 +1,4 @@
-#include "synfilesharing/synfs.h"
+#include "synfilesharing/synfilesharing.h"
 
 synfs::ServerBuilder &synfs::ServerBuilder::setDBusName(std::string_view name) {
     this->_dBusName = name;

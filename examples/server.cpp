@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "synfilesharing/synfs.h"
+#include "synfilesharing/synfilesharing.h"
 
 int main(int argc, char *argv[]) {
     std::vector<std::string> allowedMimeTypes = {

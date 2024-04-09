@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "synfilesharing/synfs.h"
+#include "synfilesharing/synfilesharing.h"
 
 namespace synfs {
     class ClientBuilder {
