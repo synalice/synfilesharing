@@ -22,7 +22,10 @@ namespace synfs::internal {
                 .onInterface(synfs::constants::INTERFACE_NAME)
                 .withNoReply()
                 .withInputParamNames("filePaths")
-                .implementedAs(callback);
+                .implementedAs([callback](const std::vector<std::string>& filePaths) {
+                    preCallbackExecution(filePaths);
+                    callback(filePaths);
+                });
         this->_fileSharingObject->finishRegistration();
     }
 

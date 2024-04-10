@@ -22,6 +22,15 @@ namespace synfs::internal {
         void createConnection();
 
     private:
+        static void preCallbackExecution(const std::vector<std::string> &filePaths) {
+            verifyMimeTypes(filePaths);
+        };
+
+        static void verifyMimeTypes(const std::vector<std::string> &filePaths) {
+            for (std::string filePath : filePaths) {
+            }
+        };
+
         std::string _serverName;
         std::string _execFlag;
         std::vector<std::string> _allowedMimeTypes;
