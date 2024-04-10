@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_library(${PROJECT_NAME} SHARED)
 target_sources(${PROJECT_NAME}
         PUBLIC
-        src/synfs.cpp
+        src/synfilesharing.cpp
         src/implementations/server.cpp
         src/builders/server_builder.cpp
 )
@@ -28,11 +28,9 @@ add_executable(${SERVER_EXAMPLE})
 target_sources(${SERVER_EXAMPLE}
         PUBLIC
         examples/server.cpp
-        src/synfs.cpp
+        src/synfilesharing.cpp
         src/implementations/server.cpp
         src/builders/server_builder.cpp
-        src/implementations/client.cpp
-        src/builders/client_builder.cpp
 )
 target_include_directories(${SERVER_EXAMPLE}
         PUBLIC
@@ -52,9 +50,7 @@ add_executable(${CLIENT_EXAMPLE})
 target_sources(${CLIENT_EXAMPLE}
         PUBLIC
         examples/client.cpp
-        src/synfs.cpp
-        src/implementations/server.cpp
-        src/builders/server_builder.cpp
+        src/synfilesharing.cpp
         src/implementations/client.cpp
         src/builders/client_builder.cpp
 )

@@ -7,9 +7,8 @@
 namespace synfs::internal {
     class Client : public synfs::IClient {
     public:
-        Client() = default;
+        Client();
 
-    public:
         void sendFiles(std::string destination, std::vector<std::string> filePaths) override;
 
         void setDBusName(const std::string &name);

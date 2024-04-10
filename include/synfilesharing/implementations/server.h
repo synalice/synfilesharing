@@ -1,16 +1,8 @@
 #ifndef SYNFILESHARING_SERVER_H
 #define SYNFILESHARING_SERVER_H
 
-#include <string>
-#include <utility>
-#include <vector>
-#include <iostream>
-#include <functional>
-
+#include "synfilesharing/synfilesharing.h"
 #include "sdbus-c++/sdbus-c++.h"
-
-#include "synfilesharing/constants.h"
-#include "synfilesharing/interfaces/i_server.h"
 
 namespace synfs::internal {
     class Server : public synfs::IServer {
@@ -19,7 +11,6 @@ namespace synfs::internal {
 
         void runIfFlagIsSet(int argc, char **argv) override;
 
-    public:
         void setDBusName(const std::string &name);
 
         void setAllowedMimeTypes(std::vector<std::string> allowedMimeTypes);

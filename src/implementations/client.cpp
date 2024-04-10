@@ -5,6 +5,7 @@
 #include "synfilesharing/implementations/client.h"
 #include "synfilesharing/constants.h"
 
+synfs::internal::Client::~Client() = default;
 
 void synfs::internal::Client::sendFiles(std::string destination, std::vector<std::string> filePaths) {
     std::unique_ptr<sdbus::IProxy> fsProxy = createProxy(destination);
@@ -30,3 +31,6 @@ std::unique_ptr<sdbus::IProxy> synfs::internal::Client::createProxy(const std::s
             std::move(this->_dbusConnection), destination, synfs::constants::OBJECT_PATH
     );
 }
+
+synfs::internal::Client::Client() = default;
+

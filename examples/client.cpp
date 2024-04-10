@@ -1,6 +1,12 @@
 #include "synfilesharing/synfilesharing.h"
 
 int main() {
-    std::unique_ptr<synfs::IServer> client = synfs::makeClient().build();
-    client.
+    std::vector<std::string> paths = {
+            "aboba",
+            "helloword",
+            "womp-womp"
+    };
+
+    std::unique_ptr<synfs::IClient> client = synfs::makeClient().build();
+    client->sendFiles(synfs::constants::DEFAULT_SERVER_NAME, paths);
 }
