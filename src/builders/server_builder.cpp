@@ -11,8 +11,8 @@ namespace synfs {
         return *this;
     }
 
-    synfs::ServerBuilder &synfs::ServerBuilder::setAllowedMimeTypes(const std::vector<std::string> &allowedMimeTypes) {
-        this->_server->setAllowedMimeTypes(allowedMimeTypes);
+    synfs::ServerBuilder &synfs::ServerBuilder::setAllowedFileExtensions(const std::vector<std::string> &allowedFileExtensions) {
+        this->_server->setAllowedFileExtensions(allowedFileExtensions);
         return *this;
     }
 

@@ -19,7 +19,7 @@ namespace synfs {
 
         synfs::ServerBuilder &setExecFlag(std::string_view execFlag = synfs::constants::DEFAULT_EXEC_FLAG);
 
-        synfs::ServerBuilder &setAllowedMimeTypes(const std::vector<std::string> &allowedMimeTypes);
+        synfs::ServerBuilder &setAllowedFileExtensions(const std::vector<std::string> &allowedFileExtensions);
 
         synfs::ServerBuilder &setOnReceiveFiles(const std::function<void(std::vector<std::string>)> &callback);
 

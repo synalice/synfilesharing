@@ -13,7 +13,7 @@ namespace synfs::internal {
 
         void setDBusName(const std::string &name);
 
-        void setAllowedMimeTypes(std::vector<std::string> allowedMimeTypes);
+        void setAllowedFileExtensions(std::vector<std::string> allowedFileExtensions);
 
         void setOnReceiveFiles(const std::function<void(std::vector<std::string>)> &callback);
 
@@ -23,17 +23,17 @@ namespace synfs::internal {
 
     private:
         static void preCallbackExecution(const std::vector<std::string> &filePaths) {
-            verifyMimeTypes(filePaths);
+            verifyFileExtensions(filePaths);
         };
 
-        static void verifyMimeTypes(const std::vector<std::string> &filePaths) {
+        static void verifyFileExtensions(const std::vector<std::string> &filePaths) {
             for (std::string filePath : filePaths) {
             }
         };
 
         std::string _serverName;
         std::string _execFlag;
-        std::vector<std::string> _allowedMimeTypes;
+        std::vector<std::string> _allowedFileExtensions;
 
         std::unique_ptr<sdbus::IConnection> _dbusConnection;
         std::unique_ptr<sdbus::IObject> _fileSharingObject;

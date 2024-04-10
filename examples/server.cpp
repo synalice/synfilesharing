@@ -4,9 +4,9 @@
 #include "synfilesharing/synfilesharing.h"
 
 int main(int argc, char *argv[]) {
-    std::vector<std::string> allowedMimeTypes = {
-            "application/pdf",
-            "image/svg+xml",
+    std::vector<std::string> allowedFileExtensions = {
+            ".pdf",
+            ".svg",
     };
 
     auto onReceiveFiles = [](const std::vector<std::string> &filePaths) {
@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     };
 
     std::unique_ptr<synfs::IServer> server = synfs::makeServer()
-            .setAllowedMimeTypes(allowedMimeTypes)
+            .setAllowedFileExtensions(allowedFileExtensions)
             .setOnReceiveFiles(onReceiveFiles)
             .build();
 

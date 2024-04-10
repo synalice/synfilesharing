@@ -13,8 +13,8 @@ namespace synfs::internal {
         this->_serverName = name;
     }
 
-    void Server::setAllowedMimeTypes(std::vector<std::string> allowedMimeTypes) {
-        this->_allowedMimeTypes = std::move(allowedMimeTypes);
+    void Server::setAllowedFileExtensions(std::vector<std::string> allowedFileExtensions) {
+        this->_allowedFileExtensions = std::move(allowedFileExtensions);
     }
 
     void Server::setOnReceiveFiles(const std::function<void(std::vector<std::string>)> &callback) {
