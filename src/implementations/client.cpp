@@ -6,8 +6,6 @@
 #include "synfilesharing/constants.h"
 
 namespace synfs::internal {
-//    Client::~Client() = default;
-
     void Client::sendFiles(std::string destination, std::vector<std::string> filePaths) {
         std::unique_ptr<sdbus::IProxy> fsProxy = createProxy(destination);
         try {
@@ -24,7 +22,11 @@ namespace synfs::internal {
     }
 
     void Client::createConnection() {
-        this->_dbusConnection = sdbus::createSessionBusConnection(this->_clientName);
+        if (this->_clientName.empty()) {
+            this->_dbusConnection = sdbus::createSessionBusConnection();
+        } else {
+            this->_dbusConnection = sdbus::createSessionBusConnection(this->_clientName);
+        }
     }
 
     std::unique_ptr<sdbus::IProxy> Client::createProxy(const std::string &destination) {

@@ -17,7 +17,7 @@ namespace synfs {
         std::unique_ptr<synfs::IClient> build();
 
     private:
-        std::string _dBusName = synfs::constants::DEFAULT_SERVER_NAME;
+        std::string _dBusName;
         std::unique_ptr<synfs::internal::Client> _client = std::make_unique<synfs::internal::Client>();
     };
 }
