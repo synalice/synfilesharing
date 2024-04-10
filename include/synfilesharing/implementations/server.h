@@ -1,7 +1,7 @@
 #ifndef SYNFILESHARING_SERVER_H
 #define SYNFILESHARING_SERVER_H
 
-#include "synfilesharing/synfilesharing.h"
+#include "synfilesharing/interfaces/i_server.h"
 #include "sdbus-c++/sdbus-c++.h"
 
 namespace synfs::internal {

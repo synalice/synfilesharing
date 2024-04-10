@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include "synfilesharing/synfilesharing.h"
 #include "synfilesharing/interfaces/i_client.h"
 #include "synfilesharing/implementations/client.h"
 

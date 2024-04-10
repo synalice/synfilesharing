@@ -6,7 +6,6 @@
 #include <vector>
 #include <functional>
 
-#include "synfilesharing/synfilesharing.h"
 #include "synfilesharing/interfaces/i_server.h"
 #include "synfilesharing/implementations/server.h"
 #include "synfilesharing/constants.h"
