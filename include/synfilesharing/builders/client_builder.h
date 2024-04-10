@@ -5,6 +5,7 @@
 
 #include "synfilesharing/interfaces/i_client.h"
 #include "synfilesharing/implementations/client.h"
+#include "synfilesharing/constants.h"
 
 namespace synfs {
     class ClientBuilder {
