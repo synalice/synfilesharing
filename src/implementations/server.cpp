@@ -3,7 +3,7 @@
 
 namespace synfs::internal {
     void Server::runIfFlagIsSet(int argc, char **argv) {
-        if (argv[1] != this->_execFlag) {
+        if (argc < 2 || argv[1] != this->_execFlag) {
             return;
         }
         this->_dbusConnection->enterEventLoop();
@@ -20,7 +20,10 @@ namespace synfs::internal {
     void Server::setOnReceiveFiles(const std::function<void(std::vector<std::string>)> &callback) {
         this->_fileSharingObject->registerMethod(synfs::constants::METHOD_SENDFILES_NAME)
                 .onInterface(synfs::constants::INTERFACE_NAME)
+                .withNoReply()
+                .withInputParamNames("filePaths")
                 .implementedAs(callback);
+        this->_fileSharingObject->finishRegistration();
     }
 
     void Server::setExecFlag(const std::string &execFlag) {
