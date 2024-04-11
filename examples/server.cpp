@@ -4,23 +4,28 @@
 #include "synfilesharing/synfilesharing.h"
 
 int main(int argc, char *argv[]) {
-    std::vector<std::string> allowedFileExtensions = {
-            ".pdf",
-            ".svg",
-    };
+    std::vector<std::string> allowedFileExtensions = {".pdf", ".svg",};
 
-    auto onReceiveFiles = [](const std::vector<std::string> &filePaths) {
-        for (std::string_view filePath: filePaths) {
-            std::cout << filePath << '\n';
-        }
+    std::vector<std::string> receivedFiles;
+
+    auto onReceiveFiles = [&receivedFiles](const std::vector<std::string>& filePaths) {
+        receivedFiles = filePaths;
     };
 
     std::unique_ptr<synfs::IServer> server = synfs::makeServer()
             .setAllowedFileExtensions(allowedFileExtensions)
             .setOnReceiveFiles(onReceiveFiles)
+            .setExecFlag(synfs::constants::DEFAULT_EXEC_FLAG)
             .build();
 
     server->runIfFlagIsSet(argc, argv);
 
-    std::cout << "Флага не было и сервер не запустился. Привет, Мир!" << '\n';
+    for (const auto &item: receivedFiles) {
+        std::cout << item;
+        if (&item != &receivedFiles.back()) {
+            std::cout << ", ";
+        }
+    }
+
+    std::cout << "Привет, Мир!" << '\n';
 }
