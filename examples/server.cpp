@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
             .saveResultsTo(receivedFiles)
             .build();
 
-    server->runIfFlagIsSet(argc, argv);
+    server->run(argc, argv);
 
     for (const std::string &item: *receivedFiles) {
         std::cout << item;

@@ -9,7 +9,7 @@ namespace synfs::internal {
     public:
         Server() = default;
 
-        void runIfFlagIsSet(int argc, char **argv) override;
+        void run(int argc, char **argv) override;
 
         void setDBusName(const std::string &name);
 

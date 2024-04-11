@@ -6,7 +6,7 @@
 #include <utility>
 
 namespace synfs::internal {
-    void Server::runIfFlagIsSet(int argc, char **argv) {
+    void Server::run(int argc, char **argv) {
         if (argc < 2 || argv[1] != this->_execFlag) {
             return;
         }

@@ -8,7 +8,7 @@ namespace synfs {
          * Запускает процесс в качестве сервера, если он был вызван с помощью DBus через .service файл.
          * (для такого запуска проверяется наличие определенного флага).
          * */
-        virtual void runIfFlagIsSet(int argc, char *argv[]) = 0;
+        virtual void run(int argc, char *argv[]) = 0;
 
         virtual ~IServer() = default;
     };
