@@ -15,7 +15,7 @@ namespace synfs::internal {
 
         void setAllowedFileExtensions(std::vector<std::string> allowedFileExtensions);
 
-        void setOnReceiveFiles(const std::function<void(std::vector<std::string>)> &callback);
+        void onReceiveFiles(std::shared_ptr<std::vector<std::string>> saveTo);
 
         void setExecFlag(const std::string &execFlag);
 
@@ -24,13 +24,16 @@ namespace synfs::internal {
     private:
         void preCallbackExecution(const std::vector<std::string> &filePaths);
 
-        static void verifyPathValidity(const std::vector<std::string> &filePaths);
+        void verifyPathValidity(const std::vector<std::string> &filePaths);
 
         void verifyFileExtensions(const std::vector<std::string> &filePaths);
 
+    private:
         std::string _serverName;
         std::string _execFlag;
         std::vector<std::string> _allowedFileExtensions;
+
+        std::shared_ptr<std::vector<std::string>> _saveTo;
 
         std::unique_ptr<sdbus::IConnection> _dbusConnection;
         std::unique_ptr<sdbus::IObject> _fileSharingObject;

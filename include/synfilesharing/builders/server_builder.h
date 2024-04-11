@@ -15,21 +15,20 @@ namespace synfs {
     public:
         ServerBuilder() = default;
 
-        synfs::ServerBuilder &setDBusName(std::string_view name);
+        [[maybe_unused]] synfs::ServerBuilder &setDBusName(std::string_view name);
 
         synfs::ServerBuilder &setExecFlag(std::string_view execFlag = synfs::constants::DEFAULT_EXEC_FLAG);
 
         synfs::ServerBuilder &setAllowedFileExtensions(const std::vector<std::string> &allowedFileExtensions);
 
-        synfs::ServerBuilder &setOnReceiveFiles(const std::function<void(std::vector<std::string>)> &callback);
+        synfs::ServerBuilder &saveResultsTo(std::shared_ptr<std::vector<std::string>> saveTo);
 
         std::unique_ptr<synfs::IServer> build();
 
     private:
         std::string _dBusName = synfs::constants::DEFAULT_SERVER_NAME;
         std::string _execFlag = synfs::constants::DEFAULT_EXEC_FLAG;
-        std::function<void(std::vector<std::string>)> onReceiveFiles;
-
+        std::shared_ptr<std::vector<std::string>> _saveResultsTo;
         std::unique_ptr<synfs::internal::Server> _server = std::make_unique<synfs::internal::Server>();
     private:
         void generateServiceFile();

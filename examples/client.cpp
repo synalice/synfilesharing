@@ -3,8 +3,8 @@
 
 int main() {
     std::vector<std::string> paths = {
-            "aboba.pdf",
-            "helloword.svg",
+            "/home/synalice/CLionProjects/synfilesharing/examples/example.txt",
+            "/home/synalice/CLionProjects/synfilesharing/examples/helloword.md"
     };
 
     std::unique_ptr<synfs::IClient> client = synfs::makeClient().build();

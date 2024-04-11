@@ -1,7 +1,9 @@
+#include <utility>
+
 #include "synfilesharing/synfilesharing.h"
 
 namespace synfs {
-    synfs::ServerBuilder &synfs::ServerBuilder::setDBusName(std::string_view name) {
+    [[maybe_unused]] synfs::ServerBuilder &synfs::ServerBuilder::setDBusName(std::string_view name) {
         this->_dBusName = name;
         return *this;
     }
@@ -11,15 +13,16 @@ namespace synfs {
         return *this;
     }
 
-    synfs::ServerBuilder &synfs::ServerBuilder::setAllowedFileExtensions(const std::vector<std::string> &allowedFileExtensions) {
+    synfs::ServerBuilder &
+    synfs::ServerBuilder::setAllowedFileExtensions(const std::vector<std::string> &allowedFileExtensions) {
         this->_server->setAllowedFileExtensions(allowedFileExtensions);
         return *this;
     }
 
-    synfs::ServerBuilder &synfs::ServerBuilder::setOnReceiveFiles(
-            const std::function<void(std::vector<std::string>)> &callback
+    synfs::ServerBuilder &synfs::ServerBuilder::saveResultsTo(
+            std::shared_ptr<std::vector<std::string>> saveTo
     ) {
-        this->onReceiveFiles = callback;
+        this->_saveResultsTo = std::move(saveTo);
         return *this;
     }
 
@@ -30,7 +33,7 @@ namespace synfs {
         generateServiceFile();
 
         this->_server->createConnection();
-        this->_server->setOnReceiveFiles(this->onReceiveFiles);
+        this->_server->onReceiveFiles(this->_saveResultsTo);
 
         return std::move(this->_server);
     }

@@ -3,6 +3,7 @@
 
 #include <filesystem>
 #include <algorithm>
+#include <utility>
 
 namespace synfs::internal {
     void Server::runIfFlagIsSet(int argc, char **argv) {
@@ -20,14 +21,15 @@ namespace synfs::internal {
         this->_allowedFileExtensions = std::move(allowedFileExtensions);
     }
 
-    void Server::setOnReceiveFiles(const std::function<void(std::vector<std::string>)> &callback) {
+    void Server::onReceiveFiles(std::shared_ptr<std::vector<std::string>> saveTo) {
+        this->_saveTo = std::move(saveTo);
         this->_fileSharingObject->registerMethod(synfs::constants::METHOD_SENDFILES_NAME)
                 .onInterface(synfs::constants::INTERFACE_NAME)
                 .withNoReply()
                 .withInputParamNames("filePaths")
-                .implementedAs([callback, this](const std::vector<std::string> &filePaths) {
+                .implementedAs([this](const std::vector<std::string> &filePaths)  {
                     preCallbackExecution(filePaths);
-                    callback(filePaths);
+                    *this->_saveTo = filePaths;
                     this->_dbusConnection->leaveEventLoop();
                 });
         this->_fileSharingObject->finishRegistration();
@@ -45,7 +47,7 @@ namespace synfs::internal {
     }
 
     void Server::preCallbackExecution(const std::vector<std::string> &filePaths) {
-//        verifyPathValidity(filePaths);
+        verifyPathValidity(filePaths);
         verifyFileExtensions(filePaths);
     }
 
@@ -72,6 +74,7 @@ namespace synfs::internal {
                 }
             }
 
+            this->_dbusConnection->leaveEventLoop();
             throw sdbus::Error(
                     synfs::constants::INTERFACE_NAME + ".Error",
                     errorMsg.str()
@@ -88,7 +91,7 @@ namespace synfs::internal {
             std::string fileExt = std::string(pathPath.extension());
 
             bool extIsForbidden = std::ranges::find(
-                            this->_allowedFileExtensions, fileExt) == this->_allowedFileExtensions.end();
+                    this->_allowedFileExtensions, fileExt) == this->_allowedFileExtensions.end();
 
             if (extIsForbidden) {
                 invalidPaths.push_back(strPath);
@@ -106,6 +109,7 @@ namespace synfs::internal {
                 }
             }
 
+            this->_dbusConnection->leaveEventLoop();
             throw sdbus::Error(
                     synfs::constants::INTERFACE_NAME + ".Error",
                     errorMsg.str()
