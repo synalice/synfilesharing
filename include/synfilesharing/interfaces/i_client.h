@@ -8,10 +8,10 @@ namespace synfs {
     class IClient {
     public:
         /**
-         * Отправляет выбранные файлы на указанный в `destination` сервер.
-         * Получает ошибку, если указанные файлы не разрешены сервером.
+         * Создаёт новое приложение, передавая в него указанные файлы.
+         * Получает ошибку, если указанные файлы не разрешены.
          * */
-        virtual void sendFiles(std::string destination, std::vector<std::string> filePaths) = 0;
+        virtual void sendFiles(std::vector<std::string> filePaths) = 0;
 
         virtual ~IClient() = default;
     };

@@ -6,8 +6,8 @@
 #include "synfilesharing/constants.h"
 
 namespace synfs::internal {
-    void Client::sendFiles(std::string destination, std::vector<std::string> filePaths) {
-        std::unique_ptr<sdbus::IProxy> fsProxy = createProxy(destination);
+    void Client::sendFiles(std::vector<std::string> filePaths) {
+        std::unique_ptr<sdbus::IProxy> fsProxy = createProxy(synfs::constants::DEFAULT_SERVER_NAME);
         try {
             fsProxy->callMethod(synfs::constants::METHOD_SENDFILES_NAME)
                     .onInterface(synfs::constants::INTERFACE_NAME)

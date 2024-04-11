@@ -8,6 +8,7 @@ int main() {
     };
 
     std::unique_ptr<synfs::IClient> client = synfs::makeClient().build();
-    client->sendFiles(synfs::constants::DEFAULT_SERVER_NAME, paths);
+    client->sendFiles(paths);
+
     std::cout << "Привет, Мир!" << '\n';
 }

@@ -9,7 +9,7 @@ namespace synfs::internal {
     public:
         Client();
 
-        void sendFiles(std::string destination, std::vector<std::string> filePaths) override;
+        void sendFiles(std::vector<std::string> filePaths) override;
 
         void setDBusName(const std::string &name);
 
