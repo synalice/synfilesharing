@@ -22,14 +22,11 @@ namespace synfs::internal {
         void createConnection();
 
     private:
-        static void preCallbackExecution(const std::vector<std::string> &filePaths) {
-            verifyFileExtensions(filePaths);
-        };
+        void preCallbackExecution(const std::vector<std::string> &filePaths);
 
-        static void verifyFileExtensions(const std::vector<std::string> &filePaths) {
-            for (std::string filePath : filePaths) {
-            }
-        };
+        static void verifyPathValidity(const std::vector<std::string> &filePaths);
+
+        void verifyFileExtensions(const std::vector<std::string> &filePaths);
 
         std::string _serverName;
         std::string _execFlag;
