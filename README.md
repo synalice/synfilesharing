@@ -26,3 +26,23 @@ cpack -G DEB
 ```
 
 Желаемый `.deb` пакет будет находиться в директории `build/_CPack_Packages/Linux/DEB`.
+
+## Использование фреймворка в собственном проекте
+
+1. Установите фреймворк с помощью `.deb` пакета.
+2. Добавьте в файле `CMakeLists.txt` своего проекта следующие строки:
+    ```cmake
+    target_link_libraries(projectName
+        PRIVATE synfilesharing sdbus-c++ systemd
+    )
+    
+    target_include_directories(projectName
+        PRIVATE synfilesharing
+    )
+    ```
+3. Для проверки того, что линковка прошла успешно можно использовать метод `synfs::helloWorld()`.
+
+## Примеры использования
+
+Примеры использования фреймворка можно увидеть в папке [examples/](examples). Оба файла оттуда компилируются
+автоматически вместе со сем проектом.
