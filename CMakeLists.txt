@@ -30,18 +30,19 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 # Dependency sdbus-c++
 #----------------------------------
 add_subdirectory(libs/sdbus-cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE libs/sdbus-cpp/include)
-target_link_libraries(${PROJECT_NAME} INTERFACE sdbus-c++)
+target_include_directories(${PROJECT_NAME} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}libs/sdbus-cpp/include>
+        $<INSTALL_INTERFACE:include>
+)
 
 #----------------------------------
 # Example server
 #----------------------------------
 add_executable(${SERVER_EXAMPLE})
 target_sources(${SERVER_EXAMPLE} PUBLIC examples/server.cpp)
-target_include_directories(${SERVER_EXAMPLE} PRIVATE include libs/sdbus-cpp/include)
+target_include_directories(${SERVER_EXAMPLE} PUBLIC include libs/sdbus-cpp/include)
 target_link_libraries(${SERVER_EXAMPLE}
-        PUBLIC ${PROJECT_NAME}
-        INTERFACE sdbus-c++
+        PUBLIC ${PROJECT_NAME} sdbus-c++
 )
 
 #----------------------------------
@@ -49,10 +50,10 @@ target_link_libraries(${SERVER_EXAMPLE}
 #----------------------------------
 add_executable(${CLIENT_EXAMPLE})
 target_sources(${CLIENT_EXAMPLE} PUBLIC examples/client.cpp)
-target_include_directories(${CLIENT_EXAMPLE} PRIVATE include libs/sdbus-cpp/include)
+target_include_directories(${CLIENT_EXAMPLE} PUBLIC include libs/sdbus-cpp/include)
 target_link_libraries(${CLIENT_EXAMPLE}
         PUBLIC ${PROJECT_NAME}
-        INTERFACE sdbus-c++
+        PUBLIC sdbus-c++
 )
 
 #----------------------------------
