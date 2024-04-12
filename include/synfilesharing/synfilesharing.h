@@ -10,6 +10,8 @@
 #include "synfilesharing/constants.h"
 
 namespace synfs {
+    [[maybe_unused]] void helloWorld(const std::string& str);
+
     /**
      * Возвращает создатель для создания сервера.
      * */
