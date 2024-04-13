@@ -13,7 +13,8 @@ namespace synfs::internal {
                     .onInterface(synfs::constants::INTERFACE_NAME)
                     .withArguments(filePaths);
         } catch (const sdbus::Error &e) {
-            std::cerr << "Получена ошибка " << e.getName() << " с сообщением " << e.getMessage() << std::endl;
+            std::cerr << "Получена ошибка (" << e.getName() << ") с сообщением (" << e.getMessage() << ")" << std::endl;
+            throw;
         }
     }
 

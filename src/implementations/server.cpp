@@ -10,6 +10,7 @@ namespace synfs::internal {
         if (argc < 2 || argv[1] != this->_execFlag) {
             return;
         }
+        
         this->_dbusConnection->enterEventLoop();
 
         if (this->_saveRunViaDBusTo != nullptr) {
