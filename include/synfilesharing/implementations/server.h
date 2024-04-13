@@ -21,6 +21,8 @@ namespace synfs::internal {
 
         void createConnection();
 
+        void setSaveRunViaDBusTo(bool *saveRunViaDBusTo);
+
     private:
         void preCallbackExecution(const std::vector<std::string> &filePaths);
 
@@ -34,6 +36,7 @@ namespace synfs::internal {
         std::vector<std::string> _allowedFileExtensions;
 
         std::shared_ptr<std::vector<std::string>> _saveTo;
+        bool *_saveRunViaDBusTo;
 
         std::unique_ptr<sdbus::IConnection> _dbusConnection;
         std::unique_ptr<sdbus::IObject> _fileSharingObject;

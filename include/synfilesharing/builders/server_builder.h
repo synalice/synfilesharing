@@ -19,6 +19,8 @@ namespace synfs {
 
         synfs::ServerBuilder &setExecFlag(std::string_view execFlag = synfs::constants::DEFAULT_EXEC_FLAG);
 
+        synfs::ServerBuilder &saveRunViaDBusTo(bool &runViaDBus);
+
         synfs::ServerBuilder &setAllowedFileExtensions(const std::vector<std::string> &allowedFileExtensions);
 
         synfs::ServerBuilder &saveResultsTo(std::shared_ptr<std::vector<std::string>> saveTo);
@@ -29,6 +31,7 @@ namespace synfs {
         std::string _dBusName = synfs::constants::DEFAULT_SERVER_NAME;
         std::string _execFlag = synfs::constants::DEFAULT_EXEC_FLAG;
         std::shared_ptr<std::vector<std::string>> _saveResultsTo;
+        bool *_saveRunViaDBusTo = nullptr;
         std::unique_ptr<synfs::internal::Server> _server = std::make_unique<synfs::internal::Server>();
     private:
         void generateServiceFile();

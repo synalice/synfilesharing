@@ -11,6 +11,10 @@ namespace synfs::internal {
             return;
         }
         this->_dbusConnection->enterEventLoop();
+
+        if (this->_saveRunViaDBusTo != nullptr) {
+            *this->_saveRunViaDBusTo = true;
+        }
     }
 
     void Server::setDBusName(const std::string &name) {
@@ -44,6 +48,10 @@ namespace synfs::internal {
         this->_fileSharingObject = sdbus::createObject(
                 *this->_dbusConnection, synfs::constants::OBJECT_PATH
         );
+    }
+
+    void Server::setSaveRunViaDBusTo(bool *saveRunViaDBusTo) {
+        this->_saveRunViaDBusTo = saveRunViaDBusTo;
     }
 
     void Server::preCallbackExecution(const std::vector<std::string> &filePaths) {

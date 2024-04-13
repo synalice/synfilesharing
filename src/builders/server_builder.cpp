@@ -13,6 +13,11 @@ namespace synfs {
         return *this;
     }
 
+    synfs::ServerBuilder &synfs::ServerBuilder::saveRunViaDBusTo(bool &runViaDBus) {
+        this->_saveRunViaDBusTo = &runViaDBus;
+        return *this;
+    }
+
     synfs::ServerBuilder &
     synfs::ServerBuilder::setAllowedFileExtensions(const std::vector<std::string> &allowedFileExtensions) {
         this->_server->setAllowedFileExtensions(allowedFileExtensions);
@@ -34,6 +39,7 @@ namespace synfs {
 
         this->_server->createConnection();
         this->_server->onReceiveFiles(this->_saveResultsTo);
+        this->_server->setSaveRunViaDBusTo(this->_saveRunViaDBusTo);
 
         return std::move(this->_server);
     }
