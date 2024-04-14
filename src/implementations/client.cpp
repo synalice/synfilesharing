@@ -8,14 +8,9 @@
 namespace synfs::internal {
     void Client::sendFiles(std::vector<std::string> filePaths) {
         std::unique_ptr<sdbus::IProxy> fsProxy = createProxy(synfs::constants::DEFAULT_SERVER_NAME);
-        try {
-            fsProxy->callMethod(synfs::constants::METHOD_SENDFILES_NAME)
-                    .onInterface(synfs::constants::INTERFACE_NAME)
-                    .withArguments(filePaths);
-        } catch (const sdbus::Error &e) {
-            std::cerr << "Получена ошибка (" << e.getName() << ") с сообщением (" << e.getMessage() << ")" << std::endl;
-            throw;
-        }
+        fsProxy->callMethod(synfs::constants::METHOD_SENDFILES_NAME)
+                .onInterface(synfs::constants::INTERFACE_NAME)
+                .withArguments(filePaths);
     }
 
     void Client::setDBusName(const std::string &name) {
