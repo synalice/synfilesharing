@@ -10,13 +10,24 @@
 - [`.deb` пакеты как для фреймворка, так и для демо приложения.](https://github.com/synalice/synfilesharing/releases/tag/latest)
 - `Dockerfile` для демонстрации компиляции на "чистой" Ubuntu 20.04.
 
+## Про архитектуру фреймворка
+
+Данный фреймворк задумывался таким образом, что один и тот же процесс, который его использует _(некое GUI приложение,
+например)_, является одновременно и сервером, и клиентом.
+
+Таким образом, если приложение запускается через DBus _(в качестве сервера)_, то мы можем не запускать определенные
+элементы интерфейса. При этом каждое приложение также выступает в роли клиента и может запускать копию самого себя,
+передавая какие-либо файлы.
+
+Более наглядно эта система видна на примере [демо Qt приложения](https://github.com/synalice/synfilesharingDemo).
+
 ## Компиляция в Docker контейнере
 
 ```shell
 git clone https://github.com/synalice/synfilesharing
 cd synfilesharing
-mkdir binaries
 docker build -t synfilesharing .
+mkdir binaries
 docker run -d --name synfilesharing -v ${PWD}/binaries:/compilation-result synfilesharing
 ```
 
@@ -38,14 +49,12 @@ cd binaries
 ```
 
 > **Внимание!**
-> 
+>
 > Если при выполнении команды `./serverExample --launched-via-dbus &` появляется сообщение `Failed to request bus name
-> (File exists)`, то нужно выполнить следующую команду и попробовать запустить сервер снова:
-> ```shell
-> pkill serverExample
-> ```
+> (File exists)`, то нужно выполнить команду `pkill serverExample` и попробовать запустить сервер снова.
 
 После запуска сервера и клиента мы увидим в терминале 3 строки:
+
 1. Полученные от клиента файлы.
 2. Сообщение от сервера.
 3. Сообщение от клиента.
@@ -71,7 +80,7 @@ cmake ..
 cmake --build .
 ```
 
-## Компиляция `.deb` пакетов
+### Компиляция `.deb` пакетов
 
 ```shell
 cpack -G DEB
@@ -98,3 +107,11 @@ cpack -G DEB
 
 Примеры использования фреймворка можно увидеть в папке [examples/](examples) и
 в [репозитории с приложением на Qt](https://github.com/synalice/synfilesharingDemo).
+
+## Все ссылки в данном README
+
+| Описание ссылки                 | Ссылка                                                         |
+|---------------------------------|----------------------------------------------------------------|
+| Библиотека sdbus-cpp            | https://github.com/Kistler-Group/sdbus-cpp                     |
+| Демо приложение на Qt           | https://github.com/synalice/synfilesharingDemo                 |
+| DEB пакеты с данным фреймворком | https://github.com/synalice/synfilesharing/releases/tag/latest |
