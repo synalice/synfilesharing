@@ -10,7 +10,7 @@ namespace synfs::internal {
         if (argc < 2 || argv[1] != this->_execFlag) {
             return;
         }
-        
+
         this->_dbusConnection->enterEventLoop();
 
         if (this->_saveRunViaDBusTo != nullptr) {
@@ -32,7 +32,7 @@ namespace synfs::internal {
                 .onInterface(synfs::constants::INTERFACE_NAME)
                 .withNoReply()
                 .withInputParamNames("filePaths")
-                .implementedAs([this](const std::vector<std::string> &filePaths)  {
+                .implementedAs([this](const std::vector<std::string> &filePaths) {
                     preCallbackExecution(filePaths);
                     *this->_saveTo = filePaths;
                     this->_dbusConnection->leaveEventLoop();
@@ -99,8 +99,11 @@ namespace synfs::internal {
             fs::path pathPath = fs::path(strPath);
             std::string fileExt = std::string(pathPath.extension());
 
-            bool extIsForbidden = std::ranges::find(
-                    this->_allowedFileExtensions, fileExt) == this->_allowedFileExtensions.end();
+            bool extIsForbidden = std::find(
+                    this->_allowedFileExtensions.begin(),
+                    this->_allowedFileExtensions.end(),
+                    fileExt
+            ) == this->_allowedFileExtensions.end();
 
             if (extIsForbidden) {
                 invalidPaths.push_back(strPath);
