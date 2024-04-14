@@ -10,6 +10,15 @@
 - [`.deb` пакеты как для фреймворка, так и для демо приложения.](https://github.com/synalice/synfilesharing/releases/tag/latest)
 - `Dockerfile` для демонстрации компиляции на "чистой" Ubuntu 20.04.
 
+## Компиляция в Docker контейнере
+
+```shell
+git clone https://github.com/synalice/synfilesharing
+cd synfilesharing
+docker build -t synfilesharing .
+docker run -d --name synfilesharing -v ${PWD}/binaries:/compilation-result synfilesharing
+```
+
 ## Компиляция проекта
 
 Для установки необходимо установить зависимость `pkg-config` и `libsystemd-dev`, а также все остальные базовые
@@ -21,6 +30,8 @@ sudo apt-get install g++ cmake
 ```
 
 ```shell
+git clone https://github.com/synalice/synfilesharing
+cd synfilesharing
 mkdir build
 cd build
 cmake ..
