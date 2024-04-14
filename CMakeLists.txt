@@ -31,7 +31,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 #----------------------------------
 add_subdirectory(libs/sdbus-cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}libs/sdbus-cpp/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/libs/sdbus-cpp/include>
         $<INSTALL_INTERFACE:include>
 )
 
