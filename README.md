@@ -15,9 +15,42 @@
 ```shell
 git clone https://github.com/synalice/synfilesharing
 cd synfilesharing
+mkdir binaries
 docker build -t synfilesharing .
 docker run -d --name synfilesharing -v ${PWD}/binaries:/compilation-result synfilesharing
 ```
+
+### Запуск скомпилированных примеров
+
+Создадим файлы, которые клиент будет передавать серверу:
+
+```shell
+touch ~/text_file.txt
+touch ~/markdown_file.md
+```
+
+Запустим сервер, а затем клиент.
+
+```shell
+cd binaries
+./serverExample --launched-via-dbus &
+./clientExample
+```
+
+> **Внимание!**
+> 
+> Если при выполнении команды `./serverExample --launched-via-dbus &` появляется сообщение `Failed to request bus name
+> (File exists)`, то нужно выполнить следующую команду и попробовать запустить сервер снова:
+> ```shell
+> pkill serverExample
+> ```
+
+После запуска сервера и клиента мы увидим в терминале 3 строки:
+1. Полученные от клиента файлы.
+2. Сообщение от сервера.
+3. Сообщение от клиента.
+
+![](/docs/screenshot_success_launch.png)
 
 ## Компиляция проекта
 
